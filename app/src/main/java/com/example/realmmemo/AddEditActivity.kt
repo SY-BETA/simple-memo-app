@@ -12,6 +12,8 @@ import java.util.*
 /**
  * メモの新規追加と修正をする Activity
  * MainActivity -> AddEditActivity
+ *
+ * 今回、メモの削除機能はあえて実装しておりません、自分で工夫しながら実装してみると面白いと思います
  */
 class AddEditActivity : AppCompatActivity() {
 
@@ -69,7 +71,7 @@ class AddEditActivity : AppCompatActivity() {
                 // android.R.~とつくもの(MainActivityでも出てきました)はandroid studioにデフォルトで要されている
                 // リソースファイル(レイアウトファイルなどの ~xmlファイルで定義されるもの)のことです
                 // android.R.id.home はデフォルトで用意されている 「←」　ボタンのビューIDです
-                // super.onBackPressed()で戻るボタン(androidの画面下部システムの戻るボタン)を押したときと同じ処理をさせます
+                // onBackPressed()で戻るボタン(androidの画面下部システムの戻るボタン)を押したときと同じ処理をさせます
                 //　コード的には次の処理は上に定義してるoverride onBackPressed() の方に行きます
                 // 当然ですが、ここを書いていないと、onCreate()で戻るボタンをActionBarに表示しましたが、押しても何も起きません
                 onBackPressed()
@@ -103,6 +105,7 @@ class AddEditActivity : AppCompatActivity() {
                 // これで新規メモの保存(insert完了です)
             }
             // 続いて、MainActivityに戻るときにresultとしてIDを渡します
+            // registerForActivityResultを使って遷移しましたが、戻るときにデータを渡すためにresultを設定します
             val intent = Intent().apply {
                 putExtra("memo", memo)
             }
